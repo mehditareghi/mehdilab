@@ -1,0 +1,249 @@
+@import 'tailwindcss';
+
+/* Radix palettes — :root / .light = light scales; .dark = dark scales */
+@import '@radix-ui/colors/slate.css';
+@import '@radix-ui/colors/slate-dark.css';
+@import '@radix-ui/colors/violet.css';
+@import '@radix-ui/colors/violet-dark.css';
+@import '@radix-ui/colors/blue.css';
+@import '@radix-ui/colors/blue-dark.css';
+@import '@radix-ui/colors/grass.css';
+@import '@radix-ui/colors/grass-dark.css';
+@import '@radix-ui/colors/orange.css';
+@import '@radix-ui/colors/orange-dark.css';
+@import '@radix-ui/colors/crimson.css';
+@import '@radix-ui/colors/crimson-dark.css';
+@import '@radix-ui/colors/iris.css';
+@import '@radix-ui/colors/iris-dark.css';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Single semantic layer: shadcn token names → Radix scales (resolve per light/dark) */
+:root {
+  --background: var(--slate-1);
+  --foreground: var(--slate-12);
+  --card: var(--slate-2);
+  --card-foreground: var(--slate-12);
+  --popover: var(--slate-1);
+  --popover-foreground: var(--slate-12);
+  --primary: var(--violet-9);
+  --primary-foreground: #fff;
+  --secondary: var(--slate-3);
+  --secondary-foreground: var(--slate-12);
+  --muted: var(--slate-3);
+  --muted-foreground: var(--slate-11);
+  --accent: var(--violet-3);
+  --accent-foreground: var(--slate-12);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: var(--slate-6);
+  --input: var(--slate-6);
+  --ring: var(--violet-8);
+  --chart-1: var(--violet-9);
+  --chart-2: var(--violet-7);
+  --chart-3: var(--slate-9);
+  --chart-4: var(--slate-10);
+  --chart-5: var(--slate-11);
+  --radius: 0.625rem;
+  --sidebar: var(--slate-2);
+  --sidebar-foreground: var(--slate-12);
+  --sidebar-primary: var(--violet-9);
+  --sidebar-primary-foreground: #fff;
+  --sidebar-accent: var(--slate-3);
+  --sidebar-accent-foreground: var(--slate-12);
+  --sidebar-border: var(--slate-6);
+  --sidebar-ring: var(--violet-8);
+
+  /* Ambient glows — follow accent via site-preferences (Radix *-5 / *-7 / *-4) */
+  --glow-orb-a: var(--violet-5);
+  --glow-orb-b: var(--violet-7);
+  --glow-spotlight: var(--violet-4);
+
+  --shadow-soft:
+    0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.06);
+}
+
+.dark {
+  --shadow-soft:
+    0 1px 2px rgb(0 0 0 / 0.2), 0 12px 40px rgb(0 0 0 / 0.35);
+}
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: 'Geist Variable', sans-serif;
+  --font-mono:
+    'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: light dark;
+    /* Smooth on the root fights wheel/trackpad scrolling + scroll anchoring when
+       layout shifts (fonts, Motion). Use instant scroll; in-page jumps can opt in later. */
+    font-size: calc(100% * var(--font-scale));
+    /* Prevent the browser from “correcting” scroll position when content height changes. */
+    overflow-anchor: none;
+    @apply font-sans;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    overflow-anchor: none;
+    @apply bg-background text-foreground antialiased;
+  }
+
+  #root {
+    min-height: 100dvh;
+  }
+
+  * {
+    @apply outline-ring/50;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 35%, transparent);
+    color: var(--foreground);
+  }
+
+  ::-moz-selection {
+    background: color-mix(in oklab, var(--primary) 35%, transparent);
+    color: var(--foreground);
+  }
+}
+
+/* Lab code blocks — Shiki `createCssVariablesTheme`: map --shiki-* → Radix / shadcn tokens */
+@layer components {
+  .code-block-shiki {
+    --shiki-background: transparent;
+    --shiki-foreground: var(--foreground);
+    --shiki-token-comment: var(--muted-foreground);
+    --shiki-token-keyword: var(--primary);
+    --shiki-token-string: var(--chart-5);
+    --shiki-token-string-expression: var(--chart-2);
+    --shiki-token-constant: var(--chart-3);
+    --shiki-token-parameter: var(--foreground);
+    --shiki-token-function: var(--ring);
+    --shiki-token-punctuation: var(--chart-4);
+    --shiki-token-link: var(--primary);
+    --shiki-token-inserted: oklch(0.55 0.12 155);
+    --shiki-token-deleted: var(--destructive);
+    --shiki-token-changed: var(--chart-2);
+
+    scrollbar-color: color-mix(in oklab, var(--border) 80%, transparent) transparent;
+    scrollbar-width: thin;
+  }
+
+  html.dark .code-block-shiki {
+    --shiki-token-inserted: oklch(0.72 0.11 152);
+  }
+
+  .code-block-shiki pre.shiki {
+    margin: 0 !important;
+    padding: 0.75rem 1rem !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.8125rem !important;
+    line-height: normal !important;
+    letter-spacing: -0.01em;
+    border-radius: 0 !important;
+    background: color-mix(
+      in oklab,
+      var(--card) 78%,
+      var(--background)
+    ) !important;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+  }
+
+  .dark .code-block-shiki pre.shiki {
+    background: color-mix(
+      in oklab,
+      var(--slate-2) 88%,
+      var(--slate-1)
+    ) !important;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.03);
+  }
+
+  /*
+   * Shiki puts literal newlines between </span><span class="line"> in the HTML.
+   * Inside <pre> those render as extra blank lines — collapse them by zeroing
+   * font metrics on `code`, then restore size on each `.line`.
+   */
+  .code-block-shiki pre.shiki code {
+    font-family: inherit !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+  }
+
+  .code-block-shiki pre.shiki code span.line {
+    display: block;
+    font-size: 0.8125rem !important;
+    line-height: 0.2 !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .code-block-shiki pre.shiki code span.line span {
+    font-size: inherit !important;
+  }
+
+  /* Live lab flash — only the edited substring; strong fg so it reads on the tint */
+  .code-block-shiki span.code-range-highlight {
+    margin: 0 -0.02em;
+    padding: 0.04em 0.12em;
+    border-radius: 0.22em;
+    background: color-mix(in oklab, var(--primary) 18%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--primary) 32%, transparent);
+    color: var(--foreground) !important;
+  }
+
+  .code-block-shiki span.code-range-highlight * {
+    color: inherit !important;
+  }
+}
