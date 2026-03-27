@@ -33,7 +33,7 @@ export function GradientField({ className }: GradientFieldProps) {
             : { x: [0, 48, 0], y: [0, 36, 0], scale: [1, 1.06, 1] }
         }
         transition={{
-          duration: 6,
+          duration: 2.6,
           repeat: still ? 0 : Infinity,
           ease: 'easeInOut',
         }}
@@ -50,7 +50,7 @@ export function GradientField({ className }: GradientFieldProps) {
             : { x: [0, -40, 0], y: [0, -28, 0], scale: [1, 1.05, 1] }
         }
         transition={{
-          duration: 7,
+          duration: 3.1,
           repeat: still ? 0 : Infinity,
           ease: 'easeInOut',
         }}
