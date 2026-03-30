@@ -6,6 +6,7 @@ import { ArrowLeft } from '@/components/animate-ui/icons/arrow-left'
 import { ArrowRight } from '@/components/animate-ui/icons/arrow-right'
 import { IconHoverScope } from '@/components/animate-ui/icons/icon-hover-scope'
 import { CursorDistortionLab } from '@/components/experiments/cursor-distortion-lab'
+import { ScrollChoreographyLab } from '@/components/experiments/scroll-choreography-lab'
 import { GlassSpotlightLab } from '@/components/experiments/glass-spotlight-lab'
 import { GradientFieldLab } from '@/components/experiments/gradient-field-lab'
 import { Badge } from '@/components/ui/badge'
@@ -136,6 +137,7 @@ export function ExperimentDetailPage() {
       {exp.slug === 'glass-spotlight' ? <GlassSpotlightLab /> : null}
       {exp.slug === 'gradient-field' ? <GradientFieldLab /> : null}
       {exp.slug === 'cursor-distortion' ? <CursorDistortionLab /> : null}
+      {exp.slug === 'scroll-choreography' ? <ScrollChoreographyLab /> : null}
     </div>
   )
 }

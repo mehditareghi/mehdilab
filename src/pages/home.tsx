@@ -57,7 +57,7 @@ export function HomePage() {
               transition={{ duration: 0.45 }}
             >
               Explore a world built from{' '}
-              <span className="text-[var(--primary)]">motion</span>, taste, and
+              <span className="text-[var(--primary)]">motion</span>, light, and
               tinkering.
             </motion.h1>
           }

@@ -8,6 +8,14 @@ export type Experiment = {
 
 export const experiments: Experiment[] = [
   {
+    slug: 'scroll-choreography',
+    title: 'Scroll choreography',
+    summary:
+      'Scroll-linked parallax, tilt, and scale in one timeline — tune depth and copy the Motion pattern for heroes and product stories.',
+    tags: ['motion', 'scroll', 'layout'],
+    status: 'live',
+  },
+  {
     slug: 'glass-spotlight',
     title: 'Glass spotlight',
     summary:
